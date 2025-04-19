@@ -21,28 +21,30 @@ public class ColdBiomeListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        ConfigManager config = new ConfigManager();
+
         Player player = event.getPlayer();
 
         if (event.getFrom().getChunk() != event.getTo().getChunk()) {
             String chunk = event.getTo().getBlock().getBiome().getKey().toString();
 
-            if (new ConfigManager().getBiomes().contains(chunk)) {
+            if (config.getBiomes().contains(chunk)) {
                 if (!activeTasks.containsKey(player.getName())) {
                     effectsManager.startEffectTask(plugin, activeTasks, player);
                 }
 
-                if (!isMessageSent) {
+                if (config.areMessagesEnabled() && !isMessageSent) {
                     isMessageSent = true;
-                    player.sendRichMessage("Cold");
+                    player.sendRichMessage(config.getMessage("entering-cold-biome"));
                 }
             }
 
             else {
                 effectsManager.stopEffectTask(activeTasks, player);
 
-                if (isMessageSent) {
+                if (config.areMessagesEnabled() && isMessageSent) {
                     isMessageSent = false;
-                    player.sendRichMessage("Warm");
+                    player.sendRichMessage(config.getMessage("leaving-cold-biome"));
                 }
             }
         }

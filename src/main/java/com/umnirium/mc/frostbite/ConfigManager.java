@@ -1,8 +1,8 @@
 package com.umnirium.mc.frostbite;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +11,7 @@ import java.util.List;
 public class ConfigManager {
     Frostbite plugin = new Frostbite();
 
-    private File messagesFile;
-    private FileConfiguration messagesConfig;
+    private FileConfiguration messagesConfig = createMessagesFile();
 
     public void reloadConfig() throws IOException {
             plugin.saveDefaultConfig();
@@ -21,19 +20,18 @@ public class ConfigManager {
             reloadMessages();
     }
 
-    public void createMessagesFile() {
-        messagesFile = new File(plugin.getDataFolder(), "messages.yml");
+    public @NotNull YamlConfiguration createMessagesFile() {
+        File messagesFile = new File(plugin.getDataFolder(), "messages.yml");
 
         if (!messagesFile.exists()) {
             plugin.saveResource("messages.yml", false);
         }
 
-        messagesConfig = YamlConfiguration.loadConfiguration(messagesFile);
+        return YamlConfiguration.loadConfiguration(messagesFile);
     }
 
     public void reloadMessages() {
-        createMessagesFile();
-        messagesConfig = YamlConfiguration.loadConfiguration(messagesFile);
+        messagesConfig = createMessagesFile();
     }
 
     // Enable or disable message on Player join
@@ -47,6 +45,10 @@ public class ConfigManager {
 
     public List<String> getBiomes() {
         return plugin.getConfig().getStringList("biomes");
+    }
+
+    public boolean areMessagesEnabled() {
+        return plugin.getConfig().getBoolean("messages");
     }
 
     public long getEffectsDelay() {
