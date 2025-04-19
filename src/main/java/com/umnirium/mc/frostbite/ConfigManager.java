@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class ConfigManager {
     Frostbite plugin = new Frostbite();
@@ -42,5 +43,9 @@ public class ConfigManager {
 
     public String getMessage(String path) {
         return messagesConfig.getString(path);
+    }
+
+    public List<String> getBiomes() {
+        return plugin.getConfig().getStringList("biomes");
     }
 }

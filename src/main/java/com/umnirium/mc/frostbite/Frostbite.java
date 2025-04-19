@@ -20,6 +20,7 @@ public class Frostbite extends JavaPlugin {
         new ConfigManager().createMessagesFile();
 
         Bukkit.getPluginManager().registerEvents(new PlayerConnectListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ColdBiomeListener(), this);
 
         LifecycleEventManager<@NotNull Plugin> manager = this.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
