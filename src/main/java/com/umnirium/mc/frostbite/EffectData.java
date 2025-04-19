@@ -1,4 +1,4 @@
 package com.umnirium.mc.frostbite;
 
-public record EffectData(String name, long time, int amplifier) {
+public record EffectData(String name, int time, int amplifier) {
 }

@@ -61,6 +61,10 @@ public class ConfigManager {
         return plugin.getConfig().getInt("effects.interval") * 20L;
     }
 
+    public boolean areEffectsEnabled() {
+        return plugin.getConfig().getBoolean("effects.enabled");
+    }
+
     public List<EffectData> getEffectsData() {
         @NotNull List<Map<?, ?>> effectsInConfig = plugin.getConfig().getMapList("effects.effects");
 
@@ -71,7 +75,7 @@ public class ConfigManager {
                 Map<?, ?> effectProps = (Map<?, ?>) effect.get(effectName.toString());
 
                 for (Object effectProp : effectProps.keySet()) {
-                    long time = effectProp.toString().equals("time") ? (int) effectProps.get(effectProp.toString()) * 20L : 0L;
+                    int time = effectProp.toString().equals("time") ? (int) effectProps.get(effectProp.toString()) * 20 : 0;
                     int amplifier = effectProp.toString().equals("amplifier") ? (int) effectProps.get(effectProp.toString()) : 0;
 
                     effects.add(new EffectData(effectName.toString(), time, amplifier));

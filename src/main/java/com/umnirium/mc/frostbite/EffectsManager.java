@@ -1,13 +1,19 @@
 package com.umnirium.mc.frostbite;
 
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 public class EffectsManager implements Listener {
     ConfigManager config = new ConfigManager();
@@ -29,6 +35,7 @@ public class EffectsManager implements Listener {
 
         BukkitRunnable task = new BukkitRunnable() {
             int freezeTicks = 0;
+            int effectCount = 0;
 
             @Override
             public void run() {
@@ -36,7 +43,26 @@ public class EffectsManager implements Listener {
                 freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + 20;
 
                 if (config.isDamageEnabled()) {
-                    player.sendRichMessage(String.valueOf(config.getDamageValue()));
+                    player.damage(config.getDamageValue());
+                }
+
+                if (config.areEffectsEnabled()) {
+                    List<EffectData> effects = config.getEffectsData();
+
+                    if (effectCount < effects.size()) {
+                        String effectName = effects.get(effectCount).name();
+                        int effectTime = effects.get(effectCount).time();
+                        int effectAmplifier = effects.get(effectCount).amplifier();
+
+                        PotionEffectType effectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
+
+                        player.addPotionEffect(new PotionEffect(Objects.requireNonNull(effectType), effectTime, effectAmplifier));
+
+                        effectCount++;
+                    }
+                    else {
+                        effectCount = 0;
+                    }
                 }
             }
         };
