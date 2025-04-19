@@ -1,0 +1,7 @@
+name: Frostbite
+version: '1.0.0'
+main: com.umnirium.mc.frostbite.Frostbite
+description: Realistic Cold Exposure in Minecraft
+author: ixcharles
+website: https://github.com/ixcharles
+api-version: '1.21.5'
