@@ -6,6 +6,13 @@ author: ixcharles
 website: https://github.com/ixcharles
 api-version: '1.21.5'
 permissions:
+  frostbite.command.*:
+    description: Gives access to all Frostbite commands
+    children:
+      frostbite.command.reload: true
+  frostbite.command.reload:
+      description: Reloads configuration
+      default: op
   frostbite.disablejoinmessage:
     description: Disable message on player join
     default: false
