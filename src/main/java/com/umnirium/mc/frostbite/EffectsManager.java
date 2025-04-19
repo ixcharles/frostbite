@@ -34,6 +34,10 @@ public class EffectsManager implements Listener {
             public void run() {
                 player.setFreezeTicks(freezeTicks);
                 freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + 20;
+
+                if (config.isDamageEnabled()) {
+                    player.sendRichMessage(String.valueOf(config.getDamageValue()));
+                }
             }
         };
 
