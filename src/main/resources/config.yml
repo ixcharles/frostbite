@@ -11,4 +11,11 @@ biomes:
   - minecraft:snowy_slops
   - minecraft:snowy_taiga
 
+effects:
+  delay: 5 # Time in seconds to wait to start having effects
+  interval: 5 # Time in seconds to give effects everytime
+  damage:
+    enabled: true
+    value: 1.0
+
 disable_join_message: false

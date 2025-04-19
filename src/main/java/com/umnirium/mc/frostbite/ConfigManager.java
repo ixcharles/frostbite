@@ -48,4 +48,20 @@ public class ConfigManager {
     public List<String> getBiomes() {
         return plugin.getConfig().getStringList("biomes");
     }
+
+    public long getEffectsDelay() {
+        return plugin.getConfig().getInt("effects.delay") * 20L;
+    }
+
+    public long getEffectsInterval() {
+        return plugin.getConfig().getInt("effects.interval") * 20L;
+    }
+
+    public boolean isDamageEnabled() {
+        return plugin.getConfig().getBoolean("effects.damage.enabled");
+    }
+
+    public double getDamageValue() {
+        return plugin.getConfig().getDouble("effects.damage.value");
+    }
 }
