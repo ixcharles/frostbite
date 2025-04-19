@@ -16,7 +16,7 @@ public class EffectsManager implements Listener {
     public void onPlayerDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
 
-        if (entity instanceof Player player) {
+        if (entity instanceof Player) {
             if (event.getCause() == EntityDamageEvent.DamageCause.FREEZE) {
                 event.setCancelled(true);
             }
