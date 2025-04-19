@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ConfigManager {
-    Frostbite plugin = new Frostbite();
+    static final Frostbite plugin = new Frostbite();
 
     private FileConfiguration messagesConfig = createMessagesFile();
 
