@@ -12,15 +12,12 @@ import java.util.HashMap;
 public class EffectsManager implements Listener {
     ConfigManager config = new ConfigManager();
 
-    int freezeTicks = 0;
-
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
 
         if (entity instanceof Player player) {
             if (event.getCause() == EntityDamageEvent.DamageCause.FREEZE) {
-                player.setWalkSpeed(0.0f);
                 event.setCancelled(true);
             }
         }
@@ -31,6 +28,8 @@ public class EffectsManager implements Listener {
         long interval = config.getEffectsInterval();
 
         BukkitRunnable task = new BukkitRunnable() {
+            int freezeTicks = 0;
+
             @Override
             public void run() {
                 player.setFreezeTicks(freezeTicks);
@@ -47,7 +46,6 @@ public class EffectsManager implements Listener {
 
         if (task != null) {
             task.cancel();
-            freezeTicks = 0;
         }
     }
 }
