@@ -1,2 +1,4 @@
-reload_success: "<aqua>[Frostbite]</aqua> <yellow>Configuration reloaded.</yellow>"
-reload_error: "<aqua>[Frostbite]</aqua> <red>Error reloading configuration.</red>"
+reload-success: "<aqua>[Frostbite]</aqua> <yellow>Configuration reloaded.</yellow>"
+reload-error: "<aqua>[Frostbite]</aqua> <red>Error reloading configuration.</red>"
+entering-cold-biome: "<aqua>Oh, it's cold right here...</aqua>"
+leaving-cold-biome: "<yellow>How warm is it here!</yellow>"

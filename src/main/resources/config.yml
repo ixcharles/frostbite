@@ -18,4 +18,6 @@ effects:
     enabled: true
     value: 1.0 # Value to damage player
 
-disable_join_message: false
+messages: true
+
+disable-join-message: false

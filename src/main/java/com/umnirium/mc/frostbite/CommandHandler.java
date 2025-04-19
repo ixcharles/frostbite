@@ -35,10 +35,10 @@ public class CommandHandler {
                                                     try {
                                                         config.reloadConfig();
                                                     } catch (IOException e) {
-                                                        ctx.getSource().getSender().sendRichMessage(config.getMessage("reload_error"));
+                                                        ctx.getSource().getSender().sendRichMessage(config.getMessage("reload-error"));
                                                         throw new RuntimeException(e);
                                                     }
-                                                    ctx.getSource().getSender().sendRichMessage(config.getMessage("reload_success"));
+                                                    ctx.getSource().getSender().sendRichMessage(config.getMessage("reload-success"));
 
                                                     return Command.SINGLE_SUCCESS;
                                                 }

@@ -38,7 +38,7 @@ public class ConfigManager {
 
     // Enable or disable message on Player join
     public boolean isMessageOnJoinEnabled() {
-        return !plugin.getConfig().getBoolean("disable_join_message");
+        return !plugin.getConfig().getBoolean("disable-join-message");
     }
 
     public String getMessage(String path) {
