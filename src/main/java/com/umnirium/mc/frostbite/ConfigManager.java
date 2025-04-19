@@ -6,7 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ConfigManager {
     static final Frostbite plugin = new Frostbite();
@@ -57,6 +59,26 @@ public class ConfigManager {
 
     public long getEffectsInterval() {
         return plugin.getConfig().getInt("effects.interval") * 20L;
+    }
+
+    public List<EffectData> getEffectsData() {
+        @NotNull List<Map<?, ?>> effectsInConfig = plugin.getConfig().getMapList("effects.effects");
+
+        List<EffectData> effects = new ArrayList<>();
+
+        for (Map<?, ?> effect : effectsInConfig) {
+            for (Object effectName : effect.keySet()) {
+                Map<?, ?> effectProps = (Map<?, ?>) effect.get(effectName.toString());
+
+                for (Object effectProp : effectProps.keySet()) {
+                    long time = effectProp.toString().equals("time") ? (int) effectProps.get(effectProp.toString()) * 20L : 0L;
+                    int amplifier = effectProp.toString().equals("amplifier") ? (int) effectProps.get(effectProp.toString()) : 0;
+
+                    effects.add(new EffectData(effectName.toString(), time, amplifier));
+                }
+            }
+        }
+        return effects;
     }
 
     public boolean isDamageEnabled() {
