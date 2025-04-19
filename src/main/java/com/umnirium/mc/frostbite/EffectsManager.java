@@ -33,7 +33,7 @@ public class EffectsManager implements Listener {
             @Override
             public void run() {
                 player.setFreezeTicks(freezeTicks);
-                freezeTicks += 20;
+                freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + 20;
             }
         };
 
