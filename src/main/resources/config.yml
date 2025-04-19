@@ -16,6 +16,6 @@ effects:
   interval: 5 # Time in seconds to give effects everytime
   damage:
     enabled: true
-    value: 1.0
+    value: 1.0 # Value to damage player
 
 disable_join_message: false
