@@ -29,27 +29,23 @@ public class CommandHandler {
                 Commands.literal("frostbite")
                         .requires(source -> source.getSender().hasPermission("frostbite.command"))
                         .then(
-                                Commands.argument("command", StringArgumentType.word())
-                                        .suggests(frostbiteSuggestions)
+                                Commands.literal("reload")
+                                        .requires(source -> source.getSender().hasPermission("frostbite.command.reload"))
                                         .executes(ctx -> {
-                                            String command = ctx.getArgument("command", String.class);
+                                                    try {
+                                                        config.reloadConfig();
+                                                    } catch (IOException e) {
+                                                        ctx.getSource().getSender().sendRichMessage(config.getMessage("reload_error"));
+                                                        throw new RuntimeException(e);
+                                                    }
+                                                    ctx.getSource().getSender().sendRichMessage(config.getMessage("reload_success"));
 
-                                            if (command.equals("reload")) {
-                                                try {
-                                                    config.reloadConfig();
-                                                } catch (IOException e) {
-                                                    ctx.getSource().getSender().sendRichMessage(config.getMessage("reload_error"));
-                                                    throw new RuntimeException(e);
+                                                    return Command.SINGLE_SUCCESS;
                                                 }
-                                                ctx.getSource().getSender().sendRichMessage(config.getMessage("reload_success"));
-                                            }
-                                            else {
-                                                return 0;
-                                            }
-
-                                            return Command.SINGLE_SUCCESS;
-                                        })
-                        ).build()
+                                        )
+                                    ).build(),
+                "Frostbite commands",
+                List.of("fb", "frost")
         );
     }
 }
