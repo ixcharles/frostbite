@@ -47,6 +47,7 @@ public class EffectsManager implements Listener {
 
         if (task != null) {
             task.cancel();
+            freezeTicks = 0;
         }
     }
 }
