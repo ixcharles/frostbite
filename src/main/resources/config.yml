@@ -12,11 +12,19 @@ biomes:
   - minecraft:snowy_taiga
 
 effects:
+  enabled: true # This enables/disables effects only, not damage
   delay: 5 # Time in seconds to wait to start having effects
   interval: 5 # Time in seconds to give effects everytime
   damage:
     enabled: true
     value: 1.0 # Value to damage player
+  effects:
+    - blindness:
+        time: 5 # Time of effect
+        amplifier: 0 # Amplifier of effect, set to 0 for level 1
+    - slowness:
+        time: 10
+        amplifier: 0
 
 messages: true
 
