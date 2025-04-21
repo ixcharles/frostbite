@@ -41,6 +41,8 @@ public class EffectsManager implements Listener {
             public void run() {
                 if (new ColdProtection().isColdProtected(player)) {
                     player.sendRichMessage("I'm protected");
+                    freezeTicks = 0;
+                    effectCount = 0;
                 }
 
                 else {

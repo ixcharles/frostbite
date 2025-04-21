@@ -1,10 +1,10 @@
 package com.umnirium.mc.frostbite;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class ColdProtection {
     ConfigManager config = new ConfigManager();
 
     public boolean isColdProtected(Player player) {
-        return isWearingLeather(player);
+        return isWearingLeather(player) || isHavingFireEnchantment(player);
     }
 
     public boolean isWearingLeather(Player player) {
@@ -29,7 +29,27 @@ public class ColdProtection {
                 }
             }
 
-            return leatherCount >= config.getLeatherArmorLevel();
+            return leatherCount >= config.getLeatherArmorCount();
+        }
+
+        return false;
+    }
+
+    public boolean isHavingFireEnchantment(Player player) {
+        if (config.isHavingFireProtectionEnabled()) {
+            int armorCount = 0;
+
+            ItemStack[] armor = player.getInventory().getArmorContents();
+
+            for (ItemStack itemStack : armor) {
+                if (itemStack != null && itemStack.containsEnchantment(Enchantment.FIRE_PROTECTION)) {
+                    if (itemStack.getEnchantmentLevel(Enchantment.FIRE_PROTECTION) > config.getFireProtectionLevel()) {
+                        armorCount++;
+                    }
+                }
+            }
+
+            return armorCount >= config.getFireProtectionCount();
         }
 
         return false;

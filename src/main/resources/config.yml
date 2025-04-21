@@ -29,7 +29,11 @@ effects:
 cold-protection:
   wearing-leather-armor:
     enabled: true
-    level: 4 # This tells how many armor you have e.g. 4 means 4 armour items (Full leather armor)
+    count: 4 # This tells how many armor you have e.g. 4 means 4 armour items (Full leather armor)
+  have-fire-enchantment:
+    enabled: true
+    level: 1
+    count: 4
 
 messages: true
 

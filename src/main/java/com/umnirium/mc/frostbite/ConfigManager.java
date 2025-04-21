@@ -97,7 +97,19 @@ public class ConfigManager {
         return plugin.getConfig().getBoolean("cold-protection.wearing-leather-armor.enabled");
     }
 
-    public int getLeatherArmorLevel () {
-        return plugin.getConfig().getInt("cold-protection.wearing-leather-armor.level");
+    public int getLeatherArmorCount () {
+        return plugin.getConfig().getInt("cold-protection.wearing-leather-armor.count");
+    }
+
+    public boolean isHavingFireProtectionEnabled() {
+        return plugin.getConfig().getBoolean("cold-protection.have-fire-enchantment.enabled");
+    }
+
+    public int getFireProtectionLevel () {
+        return plugin.getConfig().getInt("cold-protection.have-fire-enchantment.level");
+    }
+
+    public int getFireProtectionCount () {
+        return plugin.getConfig().getInt("cold-protection.have-fire-enchantment.count");
     }
 }
