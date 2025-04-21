@@ -92,4 +92,12 @@ public class ConfigManager {
     public double getDamageValue() {
         return plugin.getConfig().getDouble("effects.damage.value");
     }
+
+    public boolean isWearingLeatherProtectionEnabled() {
+        return plugin.getConfig().getBoolean("cold-protection.wearing-leather-armor.enabled");
+    }
+
+    public int getLeatherArmorLevel () {
+        return plugin.getConfig().getInt("cold-protection.wearing-leather-armor.level");
+    }
 }

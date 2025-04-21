@@ -39,29 +39,36 @@ public class EffectsManager implements Listener {
 
             @Override
             public void run() {
-                player.setFreezeTicks(freezeTicks);
-                freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + 20;
-
-                if (config.isDamageEnabled()) {
-                    player.damage(config.getDamageValue());
+                if (new ColdProtection().isColdProtected(player)) {
+                    player.sendRichMessage("I'm protected");
                 }
 
-                if (config.areEffectsEnabled()) {
-                    List<EffectData> effects = config.getEffectsData();
+                else {
+                    player.sendRichMessage("freezing");
+                    player.setFreezeTicks(freezeTicks);
+                    freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + 20;
 
-                    if (effectCount < effects.size()) {
-                        String effectName = effects.get(effectCount).name();
-                        int effectTime = effects.get(effectCount).time();
-                        int effectAmplifier = effects.get(effectCount).amplifier();
-
-                        PotionEffectType effectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
-
-                        player.addPotionEffect(new PotionEffect(Objects.requireNonNull(effectType), effectTime, effectAmplifier));
-
-                        effectCount++;
+                    if (config.isDamageEnabled()) {
+                        player.damage(config.getDamageValue());
                     }
-                    else {
-                        effectCount = 0;
+
+                    if (config.areEffectsEnabled()) {
+                        List<EffectData> effects = config.getEffectsData();
+
+                        if (effectCount < effects.size()) {
+                            String effectName = effects.get(effectCount).name();
+                            int effectTime = effects.get(effectCount).time();
+                            int effectAmplifier = effects.get(effectCount).amplifier();
+
+                            PotionEffectType effectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
+
+                            player.addPotionEffect(new PotionEffect(Objects.requireNonNull(effectType), effectTime, effectAmplifier));
+
+                            effectCount++;
+                        }
+                        else {
+                            effectCount = 0;
+                        }
                     }
                 }
             }

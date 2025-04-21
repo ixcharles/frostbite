@@ -26,6 +26,11 @@ effects:
         time: 10
         amplifier: 0
 
+cold-protection:
+  wearing-leather-armor:
+    enabled: true
+    level: 4 # This tells how many armor you have e.g. 4 means 4 armour items (Full leather armor)
+
 messages: true
 
 disable-join-message: false
