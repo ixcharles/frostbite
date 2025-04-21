@@ -116,4 +116,16 @@ public class ConfigManager {
     public boolean isHavingFireResistenceEnabled() {
         return plugin.getConfig().getBoolean("cold-protection.have-fire-resistance.enabled");
     }
+
+    public boolean isHeatSourceEnabled() {
+        return plugin.getConfig().getBoolean("cold-protection.near-heat-source.enabled");
+    }
+
+    public int getHeatSourceRadius() {
+        return plugin.getConfig().getInt("cold-protection.near-heat-source.radius");
+    }
+
+    public List<String> getHeatSources() {
+        return plugin.getConfig().getStringList("cold-protection.near-heat-source.heat-sources");
+    }
 }

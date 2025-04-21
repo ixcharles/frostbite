@@ -1,6 +1,8 @@
 package com.umnirium.mc.frostbite;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,12 +15,12 @@ public class ColdProtection {
     ConfigManager config = new ConfigManager();
 
     public boolean isColdProtected(Player player) {
-        return isWearingLeather(player) || isHavingFireEnchantment(player) || isHavingFireResistanceEffect(player);
+        return isWearingLeather(player) || isHavingFireEnchantment(player) || isHavingFireResistanceEffect(player) || isNearHeatSource(player);
     }
 
     public boolean isWearingLeather(Player player) {
         if (config.isWearingLeatherProtectionEnabled()) {
-            HashSet<Material> leather = new HashSet<Material>(List.of(Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS));
+            HashSet<Material> leather = new HashSet<>(List.of(Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS));
 
             int leatherCount = 0;
 
@@ -59,6 +61,32 @@ public class ColdProtection {
     public boolean isHavingFireResistanceEffect(Player player) {
         if (config.isHavingFireResistenceEnabled()) {
             return player.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE);
+        }
+
+        return false;
+    }
+
+    public boolean isNearHeatSource(Player player) {
+        if (config.isHeatSourceEnabled()) {
+            Location location = player.getLocation();
+
+            int cx = location.getBlockX();
+            int cy = location.getBlockY();
+            int cz = location.getBlockZ();
+
+            int radius = config.getHeatSourceRadius();
+
+            for (int x = -radius; x < radius; x++) {
+                for (int y = -radius; y < radius; y++) {
+                    for (int z = -radius; z < radius; z++) {
+                        Block block = location.getWorld().getBlockAt(cx + x, cy + y, cz + z);
+
+                        if (config.getHeatSources().contains(block.getType().getKey().toString())) {
+                            return true;
+                        }
+                    }
+                }
+            }
         }
 
         return false;

@@ -40,13 +40,13 @@ public class EffectsManager implements Listener {
             @Override
             public void run() {
                 if (new ColdProtection().isColdProtected(player)) {
-                    player.sendRichMessage("I'm protected");
                     freezeTicks = 0;
                     effectCount = 0;
+
+                    player.sendRichMessage(config.getMessage("near-heat-source"));
                 }
 
                 else {
-                    player.sendRichMessage("freezing");
                     player.setFreezeTicks(freezeTicks);
                     freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + 20;
 

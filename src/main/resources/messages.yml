@@ -2,3 +2,4 @@ reload-success: "<aqua>[Frostbite]</aqua> <yellow>Configuration reloaded.</yello
 reload-error: "<aqua>[Frostbite]</aqua> <red>Error reloading configuration.</red>"
 entering-cold-biome: "<aqua>Oh, it's cold right here...</aqua>"
 leaving-cold-biome: "<yellow>How warm is it here!</yellow>"
+near-heat-source: "<gold>Heat source! I might stay around here.</gold>"

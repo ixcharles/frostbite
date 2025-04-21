@@ -36,6 +36,13 @@ cold-protection:
     count: 4
   have-fire-resistance:
     enabled: true
+  near-heat-source:
+    enabled: true
+    radius: 5
+    heat-sources:
+      - minecraft:lava
+      - minecraft:campfire
+      - minecraft:soul_campfire
 
 messages: true
 
