@@ -112,4 +112,8 @@ public class ConfigManager {
     public int getFireProtectionCount () {
         return plugin.getConfig().getInt("cold-protection.have-fire-enchantment.count");
     }
+
+    public boolean isHavingFireResistenceEnabled() {
+        return plugin.getConfig().getBoolean("cold-protection.have-fire-resistance.enabled");
+    }
 }

@@ -34,6 +34,8 @@ cold-protection:
     enabled: true
     level: 1
     count: 4
+  have-fire-resistance:
+    enabled: true
 
 messages: true
 

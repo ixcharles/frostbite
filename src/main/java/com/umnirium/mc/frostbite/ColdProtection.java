@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,7 @@ public class ColdProtection {
     ConfigManager config = new ConfigManager();
 
     public boolean isColdProtected(Player player) {
-        return isWearingLeather(player) || isHavingFireEnchantment(player);
+        return isWearingLeather(player) || isHavingFireEnchantment(player) || isHavingFireResistanceEffect(player);
     }
 
     public boolean isWearingLeather(Player player) {
@@ -50,6 +51,14 @@ public class ColdProtection {
             }
 
             return armorCount >= config.getFireProtectionCount();
+        }
+
+        return false;
+    }
+
+    public boolean isHavingFireResistanceEffect(Player player) {
+        if (config.isHavingFireResistenceEnabled()) {
+            return player.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE);
         }
 
         return false;
