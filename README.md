@@ -66,7 +66,7 @@
 
 ## Join our Discord server
 
-![Discord Banner 2](https://discord.com/api/guilds/1360656707176501288/widget.png?style=banner2)
+[![Discord Banner 2](https://discord.com/api/guilds/1360656707176501288/widget.png?style=banner2)](https://discord.umnirium.com)
 
 ## Links
 
