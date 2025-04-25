@@ -10,9 +10,24 @@ permissions:
     description: Gives access to all Frostbite commands
     children:
       frostbite.command.reload: true
+      frostbite.command.support: true
+      frostbite.command.version: true
+      frostbite.command.help: true
   frostbite.command.reload:
       description: Reloads configuration
       default: op
+  frostbite.command.support:
+    description: Support me with a coffee
+    default: true
+  frostbite.command.version:
+    description: Check plugin version
+    default: op
+  frostbite.command.help:
+    description: Get commands
+    default: op
+  frostbite.bypass:
+    description: Bypass freezing effects
+    default: op
   frostbite.disablejoinmessage:
     description: Disable message on player join
     default: false

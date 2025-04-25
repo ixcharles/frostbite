@@ -39,11 +39,13 @@ public class EffectsManager implements Listener {
 
             @Override
             public void run() {
-                if (new ColdProtection().isColdProtected(player)) {
+                if (player.hasPermission("frostbite.bypass") || new ColdProtection().isColdProtected(player)) {
                     freezeTicks = 0;
                     effectCount = 0;
 
-                    player.sendRichMessage(config.getMessage("near-heat-source"));
+                    if (new ColdProtection().isNearHeatSource(player)) {
+                        player.sendRichMessage(config.getMessage("near-heat-source"));
+                    }
                 }
 
                 else {

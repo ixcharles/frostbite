@@ -1,8 +1,6 @@
 package com.umnirium.mc.frostbite;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.suggestion.SuggestionProvider;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,16 +10,6 @@ import java.util.List;
 @SuppressWarnings("UnstableApiUsage")
 public class CommandHandler {
     ConfigManager config = new ConfigManager();
-
-    private final SuggestionProvider<CommandSourceStack> frostbiteSuggestions =
-            ((commandContext, suggestionsBuilder) -> {
-                    List<String> suggestions = List.of("reload");
-
-                    suggestions.forEach(suggestionsBuilder::suggest);
-
-                    return suggestionsBuilder.buildFuture();
-                }
-            );
 
     public void register(Commands commands, JavaPlugin plugin) {
         commands.register(
@@ -42,7 +30,40 @@ public class CommandHandler {
                                                     return Command.SINGLE_SUCCESS;
                                                 }
                                         )
-                                    ).build(),
+                        )
+                        .then(
+                              Commands.literal("support")
+                                        .requires(source -> source.getSender().hasPermission("frostbite.command.support"))
+                                        .executes(ctx -> {
+                                              ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Thank you for using my plugin!</white>");
+                                              ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Consider supporting here:</white> <yellow><click:open_url:'https://ko-fi.com/H2H61DN2C9'>https://ko-fi.com/H2H61DN2C9</click></yellow>");
+
+                                              return Command.SINGLE_SUCCESS;
+                                        })
+                        )
+                        .then(
+                                Commands.literal("version")
+                                        .requires(source -> source.getSender().hasPermission("frostbite.command.version"))
+                                        .executes(ctx -> {
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Version 1.0.0</white>");
+
+                                            return Command.SINGLE_SUCCESS;
+                                        })
+                        )
+                        .then(
+                                Commands.literal("help")
+                                        .requires(source -> source.getSender().hasPermission("frostbite.command.help"))
+                                        .executes(ctx -> {
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Realistic Cold Exposure in Minecraft\n</white>");
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite help :</aqua> <white>Get Frostbite commands</white>");
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite support :</aqua> <white>Support me with a coffee!</white>");
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite reload :</aqua> <white>Reload config and messages</white>");
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite version :</aqua> <white>Get plugin version</white>");
+
+                                            return Command.SINGLE_SUCCESS;
+                                        })
+                        )
+                        .build(),
                 "Frostbite commands",
                 List.of("fb", "frost")
         );
