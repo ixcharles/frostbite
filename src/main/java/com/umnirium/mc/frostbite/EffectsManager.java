@@ -14,6 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class EffectsManager implements Listener {
     ConfigManager config = new ConfigManager();
@@ -29,7 +30,7 @@ public class EffectsManager implements Listener {
         }
     }
 
-    public void startEffectTask(Frostbite plugin, HashMap<String, BukkitRunnable> tasks, Player player) {
+    public void startEffectTask(Frostbite plugin, HashMap<UUID, BukkitRunnable> tasks, Player player) {
         long delay = config.getEffectsDelay();
         long interval = config.getEffectsInterval();
 
@@ -39,11 +40,11 @@ public class EffectsManager implements Listener {
 
             @Override
             public void run() {
-                if (player.hasPermission("frostbite.bypass") || new ColdProtection().isColdProtected(player)) {
+                if (player.hasPermission("frostbite.bypass") || new ColdProtection(config).isColdProtected(player)) {
                     freezeTicks = 0;
                     effectCount = 0;
 
-                    if (new ColdProtection().isNearHeatSource(player)) {
+                    if (new ColdProtection(config).isNearHeatSource(player)) {
                         player.sendRichMessage(config.getMessage("near-heat-source"));
                     }
                 }
@@ -79,11 +80,11 @@ public class EffectsManager implements Listener {
         };
 
         task.runTaskTimer(plugin, delay, interval);
-        tasks.put(player.getName(), task);
+        tasks.put(player.getUniqueId(), task);
     }
 
-    public void stopEffectTask(HashMap<String, BukkitRunnable> tasks, Player player) {
-        BukkitRunnable task = tasks.remove(player.getName());
+    public void stopEffectTask(HashMap<UUID, BukkitRunnable> tasks, Player player) {
+        BukkitRunnable task = tasks.remove(player.getUniqueId());
 
         if (task != null) {
             task.cancel();

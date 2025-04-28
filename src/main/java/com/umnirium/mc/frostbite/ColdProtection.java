@@ -12,7 +12,12 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ColdProtection {
-    ConfigManager config = new ConfigManager();
+    private final ConfigManager config;
+
+    public ColdProtection(ConfigManager config) {
+        this.config = config;
+    }
+
 
     public boolean isColdProtected(Player player) {
         return isWearingLeather(player) || isHavingFireEnchantment(player) || isHavingFireResistanceEffect(player) || isNearHeatSource(player);

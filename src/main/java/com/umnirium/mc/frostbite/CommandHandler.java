@@ -9,7 +9,11 @@ import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage")
 public class CommandHandler {
-    ConfigManager config = new ConfigManager();
+    private final ConfigManager config;
+
+    public CommandHandler(ConfigManager config) {
+        this.config = config;
+    }
 
     public void register(Commands commands, JavaPlugin plugin) {
         commands.register(
@@ -54,11 +58,16 @@ public class CommandHandler {
                                 Commands.literal("help")
                                         .requires(source -> source.getSender().hasPermission("frostbite.command.help"))
                                         .executes(ctx -> {
-                                            ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Realistic Cold Exposure in Minecraft\n</white>");
-                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite help :</aqua> <white>Get Frostbite commands</white>");
-                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite support :</aqua> <white>Support me with a coffee!</white>");
-                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite reload :</aqua> <white>Reload config and messages</white>");
-                                            ctx.getSource().getSender().sendRichMessage("<aqua>/frostbite version :</aqua> <white>Get plugin version</white>");
+                                            ctx.getSource().getSender().sendRichMessage("""
+                                                    <aqua>[Frostbite]</aqua> <white>Realistic Cold Exposure in Minecraft</white>\
+                                                    
+                                                    <aqua>/frostbite help :</aqua> <white>Get Frostbite commands</white>\
+                                                    
+                                                    <aqua>/frostbite support :</aqua> <white>Support me with a coffee!</white>\
+                                                    
+                                                    <aqua>/frostbite reload :</aqua> <white>Reload config and messages</white>\
+                                                    
+                                                    <aqua>/frostbite version :</aqua> <white>Get plugin version</white>""");
 
                                             return Command.SINGLE_SUCCESS;
                                         })

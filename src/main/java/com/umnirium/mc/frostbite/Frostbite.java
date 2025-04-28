@@ -17,16 +17,19 @@ public class Frostbite extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
-        new ConfigManager().createMessagesFile();
+        ConfigManager config = new ConfigManager();
+        EffectsManager effectsManager = new EffectsManager();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerConnectListener(), this);
-        Bukkit.getPluginManager().registerEvents(new ColdBiomeListener(this), this);
+        config.createMessagesFile();
+
+        Bukkit.getPluginManager().registerEvents(new PlayerConnectListener(config), this);
+        Bukkit.getPluginManager().registerEvents(new ColdBiomeListener(this, config, effectsManager), this);
         Bukkit.getPluginManager().registerEvents(new EffectsManager(), this);
 
         LifecycleEventManager<@NotNull Plugin> manager = this.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();
-            new CommandHandler().register(commands, this);
+            new CommandHandler(config).register(commands, this);
         });
 
         getComponentLogger().info(mm.deserialize("<aqua>[Frostbite]</aqua> <white>Plugin successfully enabled</white>"));

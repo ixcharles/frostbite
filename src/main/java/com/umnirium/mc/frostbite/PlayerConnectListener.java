@@ -6,15 +6,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerConnectListener implements Listener {
-    ConfigManager config = new ConfigManager();
+    private final ConfigManager config;
+
+    public PlayerConnectListener(ConfigManager config) {
+        this.config = config;
+    }
 
     @EventHandler
     public void onPlayerConnect (PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         if (config.isMessageOnJoinEnabled() && !player.hasPermission("frostbite.disablejoinmessage")) {
-            player.sendRichMessage("<aqua>[Frostbite]</aqua> <white>Thank you for using my plugin!</white>");
-            player.sendRichMessage("<aqua>[Frostbite]</aqua> <white>Consider supporting here:</white> <yellow><click:open_url:'https://ko-fi.com/H2H61DN2C9'>https://ko-fi.com/H2H61DN2C9</click></yellow>");
+            player.sendRichMessage("""
+                    <aqua>[Frostbite]</aqua> <white>Thank you for using my plugin!</white>\
+                    
+                    <aqua>[Frostbite]</aqua> <white>Consider supporting here:</white> <yellow><click:open_url:'https://ko-fi.com/H2H61DN2C9'>https://ko-fi.com/H2H61DN2C9</click></yellow>"""
+            );
         }
     }
 }

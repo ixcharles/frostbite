@@ -7,34 +7,37 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.UUID;
 
 public class ColdBiomeListener implements Listener {
-    Frostbite plugin;
-    EffectsManager effectsManager = new EffectsManager();
+    private final Frostbite plugin;
+    private final EffectsManager effectsManager;
+    private final ConfigManager config;
 
-    boolean isMessageSent = false;
-    public final HashMap<String, BukkitRunnable> activeTasks = new HashMap<>();
+    public final HashMap<UUID, BukkitRunnable> activeTasks = new HashMap<>();
+    private final HashSet<UUID> isMessageSentToPlayer = new HashSet<>();
 
-    public ColdBiomeListener(Frostbite plugin) {
+    public ColdBiomeListener(Frostbite plugin, ConfigManager config, EffectsManager effectsManager) {
         this.plugin = plugin;
+        this.effectsManager = effectsManager;
+        this.config = config;
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        ConfigManager config = new ConfigManager();
-
         Player player = event.getPlayer();
 
         if (event.getFrom().getChunk() != event.getTo().getChunk()) {
             String chunk = event.getTo().getBlock().getBiome().getKey().toString();
 
             if (config.getBiomes().contains(chunk)) {
-                if (!activeTasks.containsKey(player.getName())) {
+                if (!activeTasks.containsKey(player.getUniqueId())) {
                     effectsManager.startEffectTask(plugin, activeTasks, player);
                 }
 
-                if (config.areMessagesEnabled() && !isMessageSent) {
-                    isMessageSent = true;
+                if (config.areMessagesEnabled() && !isMessageSentToPlayer.contains(player.getUniqueId())) {
+                    isMessageSentToPlayer.add(player.getUniqueId());
                     player.sendRichMessage(config.getMessage("entering-cold-biome"));
                 }
             }
@@ -42,8 +45,8 @@ public class ColdBiomeListener implements Listener {
             else {
                 effectsManager.stopEffectTask(activeTasks, player);
 
-                if (config.areMessagesEnabled() && isMessageSent) {
-                    isMessageSent = false;
+                if (config.areMessagesEnabled() && isMessageSentToPlayer.contains(player.getUniqueId())) {
+                    isMessageSentToPlayer.remove(player.getUniqueId());
                     player.sendRichMessage(config.getMessage("leaving-cold-biome"));
                 }
             }
