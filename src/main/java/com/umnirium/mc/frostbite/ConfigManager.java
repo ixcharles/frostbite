@@ -5,7 +5,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +14,11 @@ public class ConfigManager {
 
     private FileConfiguration messagesConfig = createMessagesFile();
 
-    public void reloadConfig() throws IOException {
-            plugin.saveDefaultConfig();
-            plugin.reloadConfig();
+    public void reloadConfig() {
+        plugin.saveDefaultConfig();
+        plugin.reloadConfig();
 
-            reloadMessages();
+        reloadMessages();
     }
 
     public @NotNull YamlConfiguration createMessagesFile() {
@@ -36,7 +35,6 @@ public class ConfigManager {
         messagesConfig = createMessagesFile();
     }
 
-    // Enable or disable message on Player join
     public boolean isMessageOnJoinEnabled() {
         return !plugin.getConfig().getBoolean("disable-join-message");
     }

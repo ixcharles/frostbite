@@ -4,7 +4,6 @@ import com.mojang.brigadier.Command;
 import io.papermc.paper.command.brigadier.Commands;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -23,12 +22,7 @@ public class CommandHandler {
                                 Commands.literal("reload")
                                         .requires(source -> source.getSender().hasPermission("frostbite.command.reload"))
                                         .executes(ctx -> {
-                                                    try {
-                                                        config.reloadConfig();
-                                                    } catch (IOException e) {
-                                                        ctx.getSource().getSender().sendRichMessage(config.getMessage("reload-error"));
-                                                        throw new RuntimeException(e);
-                                                    }
+                                                    config.reloadConfig();
                                                     ctx.getSource().getSender().sendRichMessage(config.getMessage("reload-success"));
 
                                                     return Command.SINGLE_SUCCESS;

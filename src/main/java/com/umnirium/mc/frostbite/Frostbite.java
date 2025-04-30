@@ -32,8 +32,8 @@ public class Frostbite extends JavaPlugin {
             new CommandHandler(config).register(commands, this);
         });
 
-        getComponentLogger().info(mm.deserialize("<aqua>[Frostbite]</aqua> <white>Plugin successfully enabled</white>"));
-        getComponentLogger().info(mm.deserialize("<aqua>[Frostbite]</aqua> <white>Consider supporting here:</white> <yellow><click:open_url:'https://ko-fi.com/H2H61DN2C9'>https://ko-fi.com/H2H61DN2C9</click></yellow>"));
+        getComponentLogger().info(mm.deserialize("<aqua>Plugin successfully enabled</aqua>"));
+        getComponentLogger().info(mm.deserialize("<white>Consider supporting here:</white> <yellow><click:open_url:'https://ko-fi.com/H2H61DN2C9'>https://ko-fi.com/H2H61DN2C9</click></yellow>"));
     }
 
     @Override

@@ -13,7 +13,7 @@ public class PlayerConnectListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerConnect (PlayerJoinEvent event) {
+    public void onPlayerConnect(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         if (config.isMessageOnJoinEnabled() && !player.hasPermission("frostbite.disablejoinmessage")) {
