@@ -51,7 +51,7 @@ public class EffectsManager implements Listener {
 
                 else {
                     player.setFreezeTicks(freezeTicks);
-                    freezeTicks = freezeTicks >= 500 ? 500 : freezeTicks + config.getFreezeTicks();
+                    freezeTicks = freezeTicks >= player.getMaxFreezeTicks() ? player.getMaxFreezeTicks() : freezeTicks + config.getFreezeTicks();
 
                     if (config.isDamageEnabled()) {
                         player.damage(config.getDamageValue());
