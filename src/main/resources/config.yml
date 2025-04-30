@@ -11,6 +11,8 @@ biomes:
   - minecraft:snowy_slops
   - minecraft:snowy_taiga
 
+freeze-ticks: 20 # Amount to ticks to be added every freezing effect
+
 effects:
   enabled: true # This enables/disables effects only, not damage
   delay: 5 # Time in seconds to wait to start having effects

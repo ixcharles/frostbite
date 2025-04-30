@@ -47,6 +47,10 @@ public class ConfigManager {
         return plugin.getConfig().getStringList("biomes");
     }
 
+    public int getFreezeTicks() {
+        return plugin.getConfig().getInt("freeze-ticks");
+    }
+
     public boolean areMessagesEnabled() {
         return plugin.getConfig().getBoolean("messages");
     }
