@@ -74,7 +74,5 @@
 
 ## License
 
-This project is licensed under the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license.
-
-You can use, modify, and share this code for non-commercial purposes as long as you credit the original author.
+This project is licensed under the [GNU General Public License v3.0](https://github.com/ixcharles/frostbite/blob/main/LICENSE) license.
 
