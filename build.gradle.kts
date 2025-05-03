@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.umnirium.mc.frostbite"
-version = "1.1.0"
+version = "1.2.0"
 
 repositories {
     maven {
