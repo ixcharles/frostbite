@@ -21,13 +21,3 @@ dependencies {
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
-
-tasks.named<ProcessResources>("processResources") {
-    filesMatching("paper-plugin.yml") {
-        expand("version" to project.property("version"))
-    }
-
-    filesMatching("plugin.yml") {
-        expand("version" to project.property("version"))
-    }
-}
