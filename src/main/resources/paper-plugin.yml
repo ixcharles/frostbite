@@ -1,9 +1,5 @@
 name: Frostbite
-<<<<<<< Updated upstream
-version: '1.1.0'
-=======
 version: '${version}'
->>>>>>> Stashed changes
 main: com.umnirium.mc.frostbite.Frostbite
 description: Realistic Cold Exposure in Minecraft
 author: ixcharles
