@@ -43,7 +43,9 @@ public class CommandHandler {
                                 Commands.literal("version")
                                         .requires(source -> source.getSender().hasPermission("frostbite.command.version"))
                                         .executes(ctx -> {
-                                            ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Version 1.0.0</white>");
+                                            String version = plugin.getPluginMeta().getVersion();
+
+                                            ctx.getSource().getSender().sendRichMessage("<aqua>[Frostbite]</aqua> <white>Version" + version + "</white>");
 
                                             return Command.SINGLE_SUCCESS;
                                         })
